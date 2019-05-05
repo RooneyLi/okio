@@ -81,6 +81,12 @@ kotlin {
   }
 }
 
+test {
+  testLogging {
+    exceptionFormat = 'full'
+  }
+}
+
 // TODO(egorand): Remove when https://github.com/srs/gradle-node-plugin/issues/301 is fixed
 repositories.whenObjectAdded {
   if (it instanceof IvyArtifactRepository) {
