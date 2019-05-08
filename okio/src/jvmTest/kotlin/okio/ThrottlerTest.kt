@@ -33,8 +33,15 @@ class ThrottlerTest {
   private var stopwatch = Stopwatch()
 
   @Before fun setup() {
-    throttler.bytesPerSecond(4 * size, 4096, 8192)
-    throttlerSlow.bytesPerSecond(2 * size, 4096, 8192)
+    val waitByteCount = 4096L
+    val maxByteCount = 8192L
+
+    throttler.bytesPerSecond(4 * size, waitByteCount, maxByteCount)
+    throttler.take(maxByteCount) // Saturate throttler
+
+    throttlerSlow.bytesPerSecond(2 * size, waitByteCount, maxByteCount)
+    throttlerSlow.take(maxByteCount) // Saturate throttler
+
     stopwatch = Stopwatch()
   }
 

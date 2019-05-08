@@ -25,10 +25,10 @@ internal class Stopwatch {
 
   /**
    * Fails the test unless the time from the last assertion until now is `elapsed`, accepting
-   * differences in -200..+200 milliseconds.
+   * differences in -100..+300 milliseconds.
    */
   fun assertElapsed(elapsed: Double) {
     offset += elapsed
-    assertThat(System.nanoTime() / 1e9 - start).isCloseTo(offset, within(0.2))
+    assertThat(System.nanoTime() / 1e9 - start).isCloseTo(offset + 0.1, within(0.2))
   }
 }
